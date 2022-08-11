@@ -10,8 +10,8 @@ Predis\Autoloader::register();
 if (isset($_GET['cmd']) === true) {
   $host = 'redis-master';
   if (getenv('GET_HOSTS_FROM') == 'env') {
-    $host = getenv('REDIS_MASTER_SERVICE_HOST');
-    $port = getenv('REDIS_MASTER_SERVICE_PORT');
+    $host = getenv('REDIS_LEADER_SERVICE_HOST');
+    $port = getenv('REDIS_LEADER_SERVICE_PORT');
   }
   header('Content-Type: application/json');
   if ($_GET['cmd'] == 'set') {
@@ -27,8 +27,8 @@ if (isset($_GET['cmd']) === true) {
   } else {
     $host = 'redis-replica';
     if (getenv('GET_HOSTS_FROM') == 'env') {
-      $host = getenv('REDIS_MASTER_SERVICE_HOST');
-      $port = getenv('REDIS_MASTER_SERVICE_PORT');
+      $host = getenv('REDIS_LEADER_SERVICE_HOST');
+      $port = getenv('REDIS_LEADER_SERVICE_PORT');
     }
     $client = new Predis\Client([
       'scheme' => 'tcp',
