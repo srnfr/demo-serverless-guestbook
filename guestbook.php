@@ -27,13 +27,14 @@ if (isset($_GET['cmd']) === true) {
   } else {
     $host = 'redis-replica';
     if (getenv('GET_HOSTS_FROM') == 'env') {
-      $host = getenv('REDIS_SLAVE_SERVICE_HOST');
-      $port = getenv('REDIS_SLAVE_SERVICE_PORT');
+      $host = getenv('REDIS_MASTER_SERVICE_HOST');
+      $port = getenv('REDIS_MASTER_SERVICE_PORT');
     }
     $client = new Predis\Client([
       'scheme' => 'tcp',
       'host'   => $host,
       'port'   => $port,
+      'password'   => getenv('REDIS_PASSWORD'),
     ]);
 
     $value = $client->get($_GET['key']);
