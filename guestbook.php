@@ -11,13 +11,14 @@ if (isset($_GET['cmd']) === true) {
   $host = 'redis-master';
   if (getenv('GET_HOSTS_FROM') == 'env') {
     $host = getenv('REDIS_MASTER_SERVICE_HOST');
+    $port = getenv('REDIS_MASTER_SERVICE_PORT');
   }
   header('Content-Type: application/json');
   if ($_GET['cmd'] == 'set') {
     $client = new Predis\Client([
       'scheme' => 'tcp',
       'host'   => $host,
-      'port'   => 6379,
+      'port'   => $port,
     ]);
 
     $client->set($_GET['key'], $_GET['value']);
