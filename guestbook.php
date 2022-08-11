@@ -19,6 +19,7 @@ if (isset($_GET['cmd']) === true) {
       'scheme' => 'tcp',
       'host'   => $host,
       'port'   => $port,
+      'password'   => getenv('REDIS_PASSWORD'),
     ]);
 
     $client->set($_GET['key'], $_GET['value']);
@@ -27,11 +28,12 @@ if (isset($_GET['cmd']) === true) {
     $host = 'redis-replica';
     if (getenv('GET_HOSTS_FROM') == 'env') {
       $host = getenv('REDIS_SLAVE_SERVICE_HOST');
+      $port = getenv('REDIS_SLAVE_SERVICE_PORT');
     }
     $client = new Predis\Client([
       'scheme' => 'tcp',
       'host'   => $host,
-      'port'   => 6379,
+      'port'   => $port,
     ]);
 
     $value = $client->get($_GET['key']);
