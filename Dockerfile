@@ -31,10 +31,9 @@ ADD guestbook.php /var/www/html/guestbook.php
 ADD controllers.js /var/www/html/controllers.js
 ADD index.html /var/www/html/index.html
 
-ENV GET_HOSTS_FROM
+ENV GET_HOSTS_FROM=env
 ENV REDIS_LEADER_SERVICE_HOST
 ENV REDIS_LEADER_SERVICE_PORT
 ENV REDIS_PASSWORD
-
 
 EXPOSE 80
