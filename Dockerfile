@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+## Adaptations by srnfr
+## modernization + add ENV for serverless redis
+
 FROM php:5-apache
 
 RUN pear channel-discover pear.nrk.io
@@ -27,3 +30,11 @@ RUN sed -i 's#CustomLog /proc/self/fd/1 combined#CustomLog "|/bin/cat" combined#
 ADD guestbook.php /var/www/html/guestbook.php
 ADD controllers.js /var/www/html/controllers.js
 ADD index.html /var/www/html/index.html
+
+ENV GET_HOSTS_FROM
+ENV REDIS_LEADER_SERVICE_HOST
+ENV REDIS_LEADER_SERVICE_PORT
+ENV REDIS_PASSWORD
+
+
+EXPOSE 80
