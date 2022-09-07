@@ -38,6 +38,7 @@ if (isset($_GET['cmd']) === true) {
     ]);
 
     $value = $client->get($_GET['key']);
+    $sanitized_value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
     print('{"data": "' . $value . '"}');
   }
 } else {
