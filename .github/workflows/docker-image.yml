@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag serverles-guestbook:$(date +%s)
+      run: docker build . --file Dockerfile --tag serverless-guestbook:$(date +%s)
