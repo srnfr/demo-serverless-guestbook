@@ -29,7 +29,8 @@ RUN sed -i 's#CustomLog /proc/self/fd/1 combined#CustomLog "|/bin/cat" combined#
 
 ADD guestbook.php /var/www/html/guestbook.php
 ADD controllers.js /var/www/html/controllers.js
-ADD index.html /var/www/html/index.html
+## We want the index.html version referencing the original JS not the modified for netlify
+ADD index.html.org /var/www/html/index.html
 
 ENV GET_HOSTS_FROM="env"
 ENV REDIS_LEADER_SERVICE_HOST=""
