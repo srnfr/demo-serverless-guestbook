@@ -15,7 +15,7 @@
 ## Adaptations by srnfr
 ## modernization + securization + add ENV for serverless redis
 
-FROM php:7-apache
+FROM php:8.2-rc-cli
 
 RUN pear channel-discover pear.nrk.io
 RUN pear install nrk/Predis
