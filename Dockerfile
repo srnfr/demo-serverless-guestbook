@@ -13,7 +13,7 @@
 # limitations under the License.
 
 ## Adaptations by srnfr
-## modernization + add ENV for serverless redis
+## modernization + securization + add ENV for serverless redis
 
 FROM php:7-apache
 
