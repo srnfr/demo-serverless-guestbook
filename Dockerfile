@@ -15,10 +15,12 @@
 ## Adaptations by srnfr
 ## modernization + securization + add ENV for serverless redis
 
-FROM php:apache@sha256:f399c48032f480495d94ce9327cd3bc03c87c38bf2a58ece04dd769fddabb0bf
+FROM php:8.1-apache-bullseye
 
 RUN pear channel-discover pear.nrk.io
 RUN pear install nrk/Predis
+
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 # If the container's stdio is connected to systemd-journald,
 # /proc/self/fd/{1,2} are Unix sockets and apache will not be able to open()
@@ -31,6 +33,7 @@ ADD guestbook.php /var/www/html/guestbook.php
 ADD controllers.js /var/www/html/controllers.js
 ## We want the index.html version referencing the original JS not the modified for netlify
 ADD index.html.org /var/www/html/index.html
+ADD composer.json /var/www/html/composer.json
 
 ENV GET_HOSTS_FROM="env"
 ENV REDIS_LEADER_SERVICE_HOST=""
