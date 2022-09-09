@@ -17,10 +17,14 @@
 
 FROM php:8.1-apache-bullseye
 
+RUN apt update && apt install -y unzip
+
 RUN pear channel-discover pear.nrk.io
 RUN pear install nrk/Predis
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+COPY composer.* ./ 
+RUN composer install
 
 # If the container's stdio is connected to systemd-journald,
 # /proc/self/fd/{1,2} are Unix sockets and apache will not be able to open()
