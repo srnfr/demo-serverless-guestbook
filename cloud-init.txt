@@ -8,12 +8,10 @@ packages:
    - libapache2-mod-php
    - git
 runcmd:
-   - [ rm, -fR, /var/www/html]
-   - [ git,clone, 'https://github.com/srnfr/demo-serverless-guestbook.git', /var/www/ ]
-   - [ mv , /var/www/demo-serverless-guestbook,/var/www/html ]
-   - [ ln, -s , /home/demo-serverless-guestbook, /var/www/html ]
-   - [ rm, -f , /var/www/html/index.html ]
-   - [ mv , /var/www/html/index.html.org, /var/www/html/index.html ]
+   - [ rm, -fR, '/var/www/html']
+   - [ git,clone, 'https://github.com/srnfr/demo-serverless-guestbook.git', '/var/www/html' ]
+   - [ rm, -f , '/var/www/html/index.html' ]
+   - [ mv , '/var/www/html/index.html.org', '/var/www/html/index.html' ]
    - [ rm, -f , /etc/apache2/sites-enabled/000-default.conf ]
-   - [ mv /var/www/html/000-default.conf , /etc/apache2/sites-enabled/]
-   - [ systemctl, start, apache2.service ]
+   - [ mv , '/var/www/html/000-default.conf' , '/etc/apache2/sites-enabled/' ]
+   - [ systemctl, restart, apache2.service ]
