@@ -1,0 +1,19 @@
+#cloud-config
+package_update: true
+packages:
+   - apache2
+   - redis
+   - php
+   - php-cli
+   - libapache2-mod-php
+   - git
+runcmd:
+   - [ rm, -fR, /var/www/html]
+   - [ git,clone, 'https://github.com/srnfr/demo-serverless-guestbook.git', /var/www/ ]
+   - [ mv , /var/www/demo-serverless-guestbook,/var/www/html ]
+   - [ ln, -s , /home/demo-serverless-guestbook, /var/www/html ]
+   - [ rm, -f , /var/www/html/index.html ]
+   - [ mv , /var/www/html/index.html.org, /var/www/html/index.html ]
+   - [ rm, -f , /etc/apache2/sites-enabled/000-default.conf ]
+   - [ mv /var/www/html/000-default.conf , /etc/apache2/sites-enabled/]
+   - [ systemctl, start, apache2.service ]
