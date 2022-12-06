@@ -15,7 +15,7 @@
 ## Adaptations by srnfr
 ## modernization + securization + add ENV for serverless redis
 
-FROM php:8.1-apache-bullseye
+FROM php:8.2.0RC6-fpm
 
 RUN apt update && apt install -y unzip
 
